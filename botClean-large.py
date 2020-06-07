@@ -1,9 +1,9 @@
-#The bot here is positioned at the top left corner of a 5*5 grid. 
-# Your task is to move the bot to clean all the dirty cells. One move at a time.
+# Given the robot's current location and the configuration of dirty and clean cells 
+# in the matrix, print the next operation MegaMaid will perform 
 
-# Link: https://www.hackerrank.com/challenges/botclean
+# Link: https://www.hackerrank.com/challenges/botcleanlarge
+
 import math
-
 def position(posr,posc,dirt):
     distance = []
     for i in range(len(dirt)):
@@ -13,12 +13,11 @@ def position(posr,posc,dirt):
         #result = math.sqrt(((dirt[i][0] - posr) ** 2) + ((dirt[i][1] - posc) ** 2))
         distance.append(result)
     return [x for (y,x) in sorted(zip(distance,dirt))]
-
-
-def next_move(posr, posc, board):
+    
+def next_move(posr, posc, dimx, dimy, board):
     dirt = []
-    for i in range(5):
-        for j in range(5):
+    for i in range(dimx):
+        for j in range(dimy):
             if board[i][j]=='d':
                 dirt.append([i,j])
     
@@ -36,5 +35,6 @@ def next_move(posr, posc, board):
 
 if __name__ == "__main__":
     pos = [int(i) for i in input().strip().split()]
-    board = [[j for j in input().strip()] for i in range(5)]
-    next_move(pos[0], pos[1], board)
+    dim = [int(i) for i in input().strip().split()]
+    board = [[j for j in input().strip()] for i in range(dim[0])]
+    next_move(pos[0], pos[1], dim[0], dim[1], board)
